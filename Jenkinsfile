@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'master'
+        label 'ubuntu'
     }
     stages {
         stage('Build') {
@@ -30,27 +30,3 @@ pipeline {
         }
     }
 }
-
-// pipeline{
-//     agent{
-//         label 'slaveNode'
-//     }
-//     stages{
-//         stage('Build'){
-//             steps{
-//                 bat 'mvn -B -DskipTests clean package'
-//             }
-//         }
-//         stage('Test'){
-//             steps{
-//                 bat 'mvn test'
-//             }
-//             post{
-//                 always{
-//                     junit 'target/surefire-reports/*.xml'
-//                 }
-//             }
-//         }
-        
-//     }
-// }
