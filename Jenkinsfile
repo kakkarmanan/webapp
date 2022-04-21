@@ -23,29 +23,6 @@ pipeline {
                 }
             }
         }
-    }
-}
-
-pipeline{
-    agent{
-        label 'slaveNode'
-    }
-    stages{
-        stage('Build'){
-            steps{
-                bat 'mvn -B -DskipTests clean package'
-            }
-        }
-        stage('Test'){
-            steps{
-                bat 'mav test'
-            }
-            post{
-                always{
-                    junit 'taget/surefire-reports/*.xml'
-                }
-            }
-        }
         stage('Deploy'){
             steps{
                 bat '/var/deployment/./deployment.sh'
@@ -53,3 +30,27 @@ pipeline{
         }
     }
 }
+
+// pipeline{
+//     agent{
+//         label 'slaveNode'
+//     }
+//     stages{
+//         stage('Build'){
+//             steps{
+//                 bat 'mvn -B -DskipTests clean package'
+//             }
+//         }
+//         stage('Test'){
+//             steps{
+//                 bat 'mvn test'
+//             }
+//             post{
+//                 always{
+//                     junit 'target/surefire-reports/*.xml'
+//                 }
+//             }
+//         }
+        
+//     }
+// }
