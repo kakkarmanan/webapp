@@ -23,10 +23,13 @@ pipeline {
                 }
             }
         }
-        // stage('Deploy'){
-        //     steps{
-        //         sh '/var/deployment/./deployment.sh'
-        //     }
-        // }
+        stage('Deploy'){
+            steps {
+                bat """
+                    pscp -pw 1964 "C:\\Users\\manan\\.jenkins\\workspace\\webapp\\target\\java-webapp-1.0.jar" div@192.168.136.128:/home/div/staging/java-webapp-1.0.jar
+                    plink -v div@192.168.136.128 -pw 1964 "java -jar /home/div/staging/java-webapp-1.0.jar"
+                """
+            }
+        }
     }
 }
